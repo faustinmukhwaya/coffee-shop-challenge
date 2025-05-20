@@ -1,9 +1,14 @@
 # tests/test_order.py
 
-import unittest
-from customer import Customer
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from coffee import Coffee
+from customer import Customer
 from order import Order
+
+import unittest
 
 class TestOrder(unittest.TestCase):
     def test_valid_order(self):

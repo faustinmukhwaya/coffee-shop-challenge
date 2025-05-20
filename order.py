@@ -4,6 +4,9 @@ class Order:
     all_orders = []
 
     def __init__(self, customer, coffee, price):
+        from customer import Customer  # Local import to avoid circular dependency
+        from coffee import Coffee  # Local import to avoid circular dependency
+
         if not isinstance(customer, Customer):
             raise TypeError("customer must be an instance of Customer")
         if not isinstance(coffee, Coffee):

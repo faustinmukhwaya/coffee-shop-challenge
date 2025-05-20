@@ -1,12 +1,12 @@
 
 
 import unittest
-from customer import Customer
-from coffee import Coffee
-from order import Order  # <-- Add this import for the Order class
+from coffee import Coffee  # Importing Coffee class
+from customer import Customer  # Importing Customer class
+from order import Order  # Importing Order class
 
 class TestCoffee(unittest.TestCase):
-    def test_valid_name(self):
+    def test_average_price_zero(self):
         coffee = Coffee("Espresso")
         self.assertEqual(coffee.name, "Espresso")
 

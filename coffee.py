@@ -1,5 +1,4 @@
 # coffee.py
-
 class Coffee:
     def __init__(self, name):
         if not isinstance(name, str) or len(name) < 3:
@@ -12,6 +11,7 @@ class Coffee:
 
     @property
     def orders(self):
+        from order import Order  # Local import to avoid circular dependency
         return [order for order in Order.all_orders if order.coffee == self]
 
     @property

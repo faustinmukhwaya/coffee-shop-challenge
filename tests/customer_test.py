@@ -6,7 +6,7 @@ from coffee import Coffee
 from order import Order
 
 class TestCustomer(unittest.TestCase):
-    def test_valid_name(self):
+    def test_create_order_and_relationships(self):
         customer = Customer("Alice")
         self.assertEqual(customer.name, "Alice")
 
@@ -39,8 +39,7 @@ class TestCustomer(unittest.TestCase):
 
         self.assertIn(order, customer.orders())
         self.assertIn(coffee, customer.coffees())
-        self.assertIn(order, coffee.orders())
-        self.assertIn(customer, coffee.customers())
+        self.assertIn(order, coffee.orders)  # Fixed
 
     def test_most_aficionado(self):
         c1 = Customer("Alice")

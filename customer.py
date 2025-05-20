@@ -1,5 +1,4 @@
 # customer.py
-
 class Customer:
     def __init__(self, name):
         if not isinstance(name, str):
@@ -21,9 +20,11 @@ class Customer:
         self._name = value
 
     def create_order(self, coffee, price):
+        from order import Order  # Local import to avoid circular dependency
         return Order(self, coffee, price)
 
     def orders(self):
+        from order import Order  # Local import to avoid circular dependency
         return [order for order in Order.all_orders if order.customer == self]
 
     def coffees(self):
@@ -31,13 +32,15 @@ class Customer:
 
     @classmethod
     def most_aficionado(cls, coffee):
+        from order import Order  # Local import to avoid circular dependency
         max_spender = None
         max_spent = 0
-        for order in coffee.orders():
-            if order.customer not in cls._customer_orders:
-                cls._customer_orders[order.customer] = 0
-            cls._customer_orders[order.customer] += order.price
-            if cls._customer_orders[order.customer] > max_spent:
+        _customer_orders = {}  # Initialize a dictionary to track spending per customer
+        for order in coffee.orders:  # Fixed: Remove parentheses
+            if order.customer not in _customer_orders:
+                _customer_orders[order.customer] = 0
+            _customer_orders[order.customer] += order.price
+            if _customer_orders[order.customer] > max_spent:
                 max_spender = order.customer
-                max_spent = cls._customer_orders[order.customer]
+                max_spent = _customer_orders[order.customer]
         return max_spender
